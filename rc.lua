@@ -18,7 +18,7 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 require("debian.menu")
 
 -- Custom Configs
-mouse_focus = false
+local enable_mouse_enter_focus = false
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -548,7 +548,7 @@ client.connect_signal("request::titlebars", function(c)
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.
-if mouse_focus then
+if enable_mouse_enter_focus then
    client.connect_signal("mouse::enter", function(c)
        if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
            and awful.client.focus.filter(c) then
