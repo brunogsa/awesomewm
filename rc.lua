@@ -2,10 +2,13 @@
 local gears = require("gears")
 local awful = require("awful")
 require("awful.autofocus")
+
 -- Widget and layout library
 local wibox = require("wibox")
+
 -- Theme handling library
 local beautiful = require("beautiful")
+
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
@@ -13,6 +16,9 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 
 -- Load Debian menu entries
 require("debian.menu")
+
+-- Custom Configs
+mouse_focus = false
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -542,12 +548,14 @@ client.connect_signal("request::titlebars", function(c)
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.
-client.connect_signal("mouse::enter", function(c)
-    if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
-        and awful.client.focus.filter(c) then
-        client.focus = c
-    end
-end)
+if mouse_focus then
+   client.connect_signal("mouse::enter", function(c)
+       if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
+           and awful.client.focus.filter(c) then
+           client.focus = c
+       end
+   end)
+end
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
