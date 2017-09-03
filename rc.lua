@@ -2,13 +2,10 @@
 local gears = require("gears")
 local awful = require("awful")
 require("awful.autofocus")
-
 -- Widget and layout library
 local wibox = require("wibox")
-
 -- Theme handling library
 local beautiful = require("beautiful")
-
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
@@ -75,7 +72,7 @@ awful.layout.layouts = {
     awful.layout.suit.corner.nw,
     awful.layout.suit.corner.ne,
     awful.layout.suit.corner.sw,
-    awful.layout.suit.corner.se,
+    awful.layout.suit.corner.se
 }
 -- }}}
 
@@ -187,9 +184,25 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    local tag_names = { "development", "searches", "misc" }
-    local tag_layouts = { "l.max", "l.max", "l.max" }
-    awful.tag(tag_names, s, tag_layouts)
+    local my_tag_configs = {
+       names = { "Development", "Searches", "Misc "},
+       layouts = { "l.max", "l.max", "l.max" }
+    }
+
+    awful.tag(my_tag_configs.names, s, my_tag_configs.layouts)
+
+    -- Create a promptbox for each screen
+    s.mypromptbox = awful.widget.prompt()
+    -- Create an imagebox widget which will contains an icon indicating which layout we're using.
+    -- We need one layoutbox per screen.
+    s.mylayoutbox = awful.widget.layoutbox(s)
+    s.mylayoutbox:buttons(awful.util.table.join(
+                           awful.button({ }, 1, function () awful.layout.inc( 1) end),
+                           awful.button({ }, 3, function () awful.layout.inc(-1) end),
+                           awful.button({ }, 4, function () awful.layout.inc( 1) end),
+                           awful.button({ }, 5, function () awful.layout.inc(-1) end)))
+    -- Create a taglist widget
+    s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, taglist_buttons)
 
     -- Create a tasklist widget
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, tasklist_buttons)
