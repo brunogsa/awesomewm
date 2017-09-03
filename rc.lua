@@ -44,12 +44,12 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("~/.config/awesome/mytheme.lua")
+beautiful.init("~/awesomewm/mytheme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "gnome-terminal"
-editor = "nvim"
-editor_cmd = terminal .. " -e tmux"
+editor = os.getenv("EDITOR") or "nvim"
+editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -187,7 +187,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    local tag_names = { "Development", "Searches", "Misc" }
+    local tag_names = { "development", "searches", "misc" }
     local tag_layouts = { "l.max", "l.max", "l.max" }
     awful.tag(tag_names, s, tag_layouts)
 
