@@ -56,6 +56,11 @@ beautiful.init("~/awesomewm/mytheme.lua")
 -- Custom Configs
 local enable_mouse_enter_focus = false
 
+local my_tag_configs = {
+    names = { "1: development", "2: searches", "3: misc "},
+    layouts = { "l.max", "l.max", "l.max" }
+}
+
 -- This is used later as the default terminal and editor to run.
 terminal = "gnome-terminal"
 editor = os.getenv("EDITOR") or "nvim"
@@ -209,11 +214,6 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    local my_tag_configs = {
-        names = { "1: development", "2: searches", "3: misc "},
-        layouts = { "l.max", "l.max", "l.max" }
-    }
-
     awful.tag(my_tag_configs.names, s, my_tag_configs.layouts)
 
     -- Create a promptbox for each screen
