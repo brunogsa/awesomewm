@@ -212,7 +212,7 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Each screen has its own tag table.
     local my_tag_configs = {
-        names = { "Development", "Searches", "Misc "},
+        names = { "1: development", "2: searches", "3: misc "},
         layouts = { "l.max", "l.max", "l.max" }
     }
 
