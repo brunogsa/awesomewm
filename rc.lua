@@ -330,7 +330,7 @@ globalkeys = awful.util.table.join(
 
     -- Layout manipulation
     awful.key(
-        { modkey }, "j",
+        { modkey, "Shift" }, "j",
 
         function ()
             awful.client.swap.byidx(1)
@@ -340,7 +340,7 @@ globalkeys = awful.util.table.join(
     ),
 
     awful.key(
-        { modkey }, "k",
+        { modkey, "Shift" }, "k",
 
         function ()
             awful.client.swap.byidx(-1)
@@ -350,7 +350,7 @@ globalkeys = awful.util.table.join(
     ),
 
     awful.key(
-        { modkey }, "j",
+        { modkey, "Control" }, "j",
 
         function ()
             awful.screen.focus_relative(1)
@@ -360,7 +360,7 @@ globalkeys = awful.util.table.join(
     ),
 
     awful.key(
-        { modkey }, "k",
+        { modkey, "Control" }, "k",
 
         function ()
             awful.screen.focus_relative(-1)
@@ -402,13 +402,13 @@ globalkeys = awful.util.table.join(
     ),
 
     awful.key(
-        { modkey }, "r",
+        { modkey, "Control" }, "r",
         awesome.restart,
         { description = "reload awesome", group = "awesome" }
     ),
 
     awful.key(
-        { modkey }, "q",
+        { modkey, "Shift" }, "q",
         awesome.quit,
         { description = "quit awesome", group = "awesome" }
     ),
